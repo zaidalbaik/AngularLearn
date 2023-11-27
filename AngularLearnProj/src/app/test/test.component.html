@@ -1,1 +1,33 @@
-<p>test works!</p>
+<div class="container p-3">
+  <p class="bg-success">The name is : {{name}}</p>
+  <p [class]="cssClass">The name is : {{name}}</p>
+  <p class="bg-black" [class]="cssClass">The name is : {{name}}</p>
+  <p [class.text-danger]="isError">The name is : {{name}}</p>
+
+  <p [ngClass]="tstClass">The name is : {{name}}</p>
+
+  <h2 [style.color]="isError ? 'red' :'green'">Header 2 </h2>
+
+  <h2 [ngStyle]="titleStyle">Header test</h2>
+
+
+  <button class="btn btn-primary" (click)="onClick($event)">Click me</button>
+  <h3>{{testText}}</h3>
+
+  <input #txtInput type="text">
+  <button class="btn btn-primary" (click)="onInputClick(txtInput.value)">Tesstt</button>
+
+  <input #myTitle (keyup)="keyup(myTitle.value)">
+  <h2>{{ textOneWay }}</h2>
+
+  <!-- Two way bindings  -->
+  <input type="text" [(ngModel)]="msgBindings">
+  {{msgBindings}}
+
+  <label [style.font-size.px]="fontSize">Font size {{fontSize}}px</label>
+  <button (click)="increaseFontSize()">+</button>
+  <button (click)="decreaseFontSize()">-</button>
+
+  <p>T
+    he App Url is :{{url}}</p>
+</div>
