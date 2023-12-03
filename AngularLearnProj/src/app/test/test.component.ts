@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -9,11 +9,10 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, FormsModule],
   templateUrl: './test.component.html',
   styleUrl: './test.component.css',
-  encapsulation: ViewEncapsulation.ShadowDom
+  // encapsulation: ViewEncapsulation.None,
 })
 
 export class TestComponent {
-
   //get
   public get platformId(): Object {
     return this._platformId;
@@ -27,7 +26,26 @@ export class TestComponent {
   public msgBindings!: string;
   public textOneWay = 'default value';
 
+  public color = "Orange";
+
+  public colorArray = ["Red", "Yellow", "Green"];
+
   fontSize = 16; // Initial font size
+
+  //from parent component 'appComponent'
+  //for access this public variable from parent component and bind this field to parent field use @Input('bindingName') keyword
+  //ex:
+  //@Input() public parentData = '';
+  //or use this syntax for use alias names
+  @Input('parentData') public pa2: any;
+
+
+  //for implement event use output()
+  @Output() public childEvent = new EventEmitter();
+
+  childEventOnClick() {
+    this.childEvent.emit('Hi zaid how are you');
+  }
 
   public titleStyle = {
     color: "Orange",
@@ -39,6 +57,8 @@ export class TestComponent {
     "text-danger": !this.isSuccess,
     "text-success": this.isSuccess
   }
+
+  public data = new Date();
 
   constructor(@Inject(PLATFORM_ID) private readonly _platformId: Object) {
     this.name = "zaid";

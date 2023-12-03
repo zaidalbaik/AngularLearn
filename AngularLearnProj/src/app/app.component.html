@@ -257,7 +257,16 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<h2>{{title}} {{parentName}}</h2>
 
-<app-test></app-test>
+<div>
+  <!-- child component -->
+  <app-test [parentData]="parentName" (childEvent)="message=$event"></app-test>
+
+  <div>
+    <p class="text-success"> {{message}} </p>
+  </div>
+</div>
+
 
 <router-outlet></router-outlet>

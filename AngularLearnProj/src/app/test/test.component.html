@@ -1,33 +1,174 @@
 <div class="container p-3">
-  <p class="bg-success">The name is : {{name}}</p>
-  <p [class]="cssClass">The name is : {{name}}</p>
-  <p class="bg-black" [class]="cssClass">The name is : {{name}}</p>
-  <p [class.text-danger]="isError">The name is : {{name}}</p>
+  <hr>
 
-  <p [ngClass]="tstClass">The name is : {{name}}</p>
+  <p class="bg-success">The name is: {{ name }}</p>
 
-  <h2 [style.color]="isError ? 'red' :'green'">Header 2 </h2>
+  <hr>
+
+  <p [class]="cssClass">The name is: {{ name }}</p>
+
+  <hr>
+
+  <p class="bg-black" [class]="cssClass">The name is: {{ name }}</p>
+
+  <hr>
+
+  <p [class.text-danger]="isError">The name is: {{ name }}</p>
+
+  <hr>
+
+  <p [ngClass]="tstClass">The name is: {{ name }}</p>
+
+  <hr>
+
+  <h2 [style.color]="isError ? 'red' : 'green'">Header 2</h2>
+
+  <hr>
 
   <h2 [ngStyle]="titleStyle">Header test</h2>
 
+  <hr>
 
   <button class="btn btn-primary" (click)="onClick($event)">Click me</button>
-  <h3>{{testText}}</h3>
+  <h3>{{ testText }}</h3>
+
+  <hr>
 
   <input #txtInput type="text">
-  <button class="btn btn-primary" (click)="onInputClick(txtInput.value)">Tesstt</button>
+  <button class="btn btn-primary" (click)="onInputClick(txtInput.value)">Test</button>
+
+  <hr>
 
   <input #myTitle (keyup)="keyup(myTitle.value)">
   <h2>{{ textOneWay }}</h2>
 
-  <!-- Two way bindings  -->
-  <input type="text" [(ngModel)]="msgBindings">
-  {{msgBindings}}
+  <hr>
 
-  <label [style.font-size.px]="fontSize">Font size {{fontSize}}px</label>
+  <!-- Two-way bindings -->
+  <input type="text" [(ngModel)]="msgBindings">
+  {{ msgBindings }}
+
+  <hr>
   <button (click)="increaseFontSize()">+</button>
   <button (click)="decreaseFontSize()">-</button>
 
-  <p>T
-    he App Url is :{{url}}</p>
+  <label [style.font-size.px]="fontSize" style="display: block;">Font size {{ fontSize }}px</label>
+
+
+  <hr>
+
+  <p>The App Url is: {{ url }}</p>
+
+  <hr>
+
+  <!-- ---------------------------------------------------- -->
+
+  <!-- ngIf => using if statment with binding -->
+
+  <div *ngIf="isSuccess; then hiZaidID else welcomeZaidID"></div>
+
+  <ng-template #hiZaidID>
+    <h2>Hi Zaid</h2>
+  </ng-template>
+
+  <ng-template #welcomeZaidID>
+    Welcome Zaid
+  </ng-template>
+
+  <hr>
+
+  <!-- ---------------------------------------------------- -->
+
+  <!-- ngSwitch => using switch statment with binding -->
+
+  <div [ngSwitch]="color.toLocaleLowerCase()">
+    <div *ngSwitchCase="'red'">
+      <p style="color: red;">Red</p>
+    </div>
+    <div *ngSwitchCase="'orange'">
+      <p style="color: orange;">Orange</p>
+    </div>
+    <div *ngSwitchCase="'yellow'">
+      <p style="color: yellow;">Yellow</p>
+    </div>
+    <div *ngSwitchDefault>
+      <p style="color: blue;">The Color Not Found</p>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <hr>
+
+  <!-- ---------------------------------------------------- -->
+
+  <!-- ngFor => using For statment with binding -->
+
+  <div *ngFor="let color of colorArray index as i">
+    <h1 [style.color]="color"> {{i}}{{color}}</h1>
+  </div>
+
+  <hr>
+
+  <div *ngFor="let color of colorArray first as s">
+    <h1> {{s}}{{color}}</h1>
+  </div>
+
+  <hr>
+
+  <div *ngFor="let color of colorArray last as s">
+    <h1> {{s}}{{color}}</h1>
+  </div>
+
+  <hr>
+
+  <div *ngFor="let color of colorArray odd as s">
+    <h1> {{s}}{{color}}</h1>
+  </div>
+
+  <hr>
+
+  <div *ngFor="let color of colorArray even as s">
+    <h1> {{s}}{{color}}</h1>
+  </div>
+
+  <hr>
+
+  <h1>hello {{pa2}}</h1>
+  <h1>{{pa2}}</h1>
+
+  <hr>
+
+  <button (click)="childEventOnClick()">click to run event from child to parent</button>
+
+  <hr>
+
+  <!-- Using pipes in angular for change format to any data -->
+
+  <p>{{name | lowercase}}</p>
+  <p>{{name | uppercase}}</p>
+  <p>{{name | titlecase}}</p>
+  <p>{{name | slice:1:4}}</p>
+  <p>{{titleStyle | json}}</p>
+
+  <p>{{6.587 |number: '1.2-3'}}</p><!-- 6.587-->
+  <p>{{6.587 |number: '3.4-5'}}</p><!-- 006.5870-->
+  <p>{{6.587 |number: '3.1-2'}}</p><!-- 006.59-->
+
+  <p>{{0.25 | percent}}</p>
+
+  <p>{{0.25 | currency}}</p> <!--defualt currency is $-->
+
+  <p>{{0.25 | currency:'JD'}}</p>
+
+  <p>{{data}}</p>
+  <p>{{data | date:'short'}}</p>
+  <p>{{data | date:'shortDate'}}</p>
+  <p>{{data | date:'shortTime'}}</p>
+
+  <hr>
+
+
+
 </div>

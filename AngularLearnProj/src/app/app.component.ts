@@ -13,4 +13,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class AppComponent {
   title = 'AngularLearnProj';
+
+  //for send name to child component as testComponent
+  public parentName = 'zaid albaik';
+
+  //for receved message from child component as testComponent
+  public message = '';
 }
