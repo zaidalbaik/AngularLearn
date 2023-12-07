@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Inject, Input, Output, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { isPlatformBrowser } from '@angular/common';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { IEmployee, IStatus } from '../Models/IEmployee';
+import { EmployeeService } from '../services/employee.service';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-test',
@@ -9,14 +11,12 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, FormsModule],
   templateUrl: './test.component.html',
   styleUrl: './test.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
   // encapsulation: ViewEncapsulation.None,
 })
 
-export class TestComponent {
-  //get
-  public get platformId(): Object {
-    return this._platformId;
-  }
+export class TestComponent implements OnInit /*, OnDestroy*/ {
+
   public name = "Hello";
   public url = "";
   public cssClass = "text-primary"
@@ -25,27 +25,14 @@ export class TestComponent {
   public testText = 0;
   public msgBindings!: string;
   public textOneWay = 'default value';
-
   public color = "Orange";
-
   public colorArray = ["Red", "Yellow", "Green"];
-
   fontSize = 16; // Initial font size
+  public data = new Date();
+  listOfEmployees?: IEmployee[];
 
-  //from parent component 'appComponent'
-  //for access this public variable from parent component and bind this field to parent field use @Input('bindingName') keyword
-  //ex:
-  //@Input() public parentData = '';
-  //or use this syntax for use alias names
-  @Input('parentData') public pa2: any;
-
-
-  //for implement event use output()
-  @Output() public childEvent = new EventEmitter();
-
-  childEventOnClick() {
-    this.childEvent.emit('Hi zaid how are you');
-  }
+  //for unsubscribe
+  // employeeSubscription?: Subscription;
 
   public titleStyle = {
     color: "Orange",
@@ -58,26 +45,35 @@ export class TestComponent {
     "text-success": this.isSuccess
   }
 
-  public data = new Date();
+  //from parent component 'appComponent'
+  //for access this public variable from parent component and bind this field to parent field use @Input('bindingName') keyword
+  //ex:
+  //@Input() public parentData = '';
+  //or use this syntax for use alias names
+  @Input('parentData') public pa2: any;
 
-  constructor(@Inject(PLATFORM_ID) private readonly _platformId: Object) {
-    this.name = "zaid";
+  //note: inject in Dependency injection :
+  //for inject service use 'inject' method or  inject instance in constructor as param
+  constructor(private _employeeService: EmployeeService) { }
 
-    if (isPlatformBrowser(this.platformId)) {
-      // Only access window object in a browser environment
-      this.url = window.location.href;
-
-    }
+  //for implement event use output()s
+  @Output() public childEvent = new EventEmitter();
+  childEventOnClick() {
+    this.childEvent.emit('Hi zaid how are you');
   }
+
   onClick(ev: object): void {
     this.testText += 1;
   }
+
   onInputClick(val: string): void {
     console.log(val);
   }
+
   keyup(value: string) {
     this.textOneWay = value;
   }
+
   increaseFontSize() {
     this.fontSize += 2;
   }
@@ -85,20 +81,14 @@ export class TestComponent {
   decreaseFontSize() {
     this.fontSize = Math.max(2, this.fontSize - 2);
   }
+
+  //overrides methods
+  ngOnInit(): void {
+    //initialize data here
+    this.name = "zaid";
+    this._employeeService.getStatus().subscribe(s => this.listOfEmployees = s.data);
+  }
 }
-
-
-// @Component({
-//   selector: 'app-ss',
-//   standalone: true,
-//   template: `<h1>Heloooooooooooooooooooooooooooooo</h1>`,
-//   imports: [CommonModule]
-// })
-// export class SComponent {
-//   title = 'AngularLearnProj';
-// }
-
-
 
 
 // // learn Type Script
@@ -113,8 +103,7 @@ export class TestComponent {
 // class Toyota implements Car {
 //   constructor(public name: string, public color: string) {
 //   }
-
-
+//
 //   getColor(): string {
 //     return this.color;
 //   }

@@ -1,0 +1,15 @@
+<div>
+  <!-- Old Syntax to ngFor -->
+  <!-- <ul *ngFor="let employee of listOfEmployees">
+    <li>{{employee.id}} , {{employee.employee_name}} ,{{employee.employee_salary}} ,{{employee.employee_age}}
+      ,{{employee.profile_image}}</li>
+  </ul> -->
+
+  <!-- after version 7 for angular use @for -->
+  @for (employee of listOfEmployees; track $index) {
+  <li>{{employee.id}} , {{employee.employee_name}} ,{{employee.employee_salary}} ,{{employee.employee_age}}
+    ,{{employee.profile_image}}</li>
+  }
+
+
+</div>

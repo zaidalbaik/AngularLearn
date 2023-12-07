@@ -1,0 +1,28 @@
+<!-- Items Table -->
+<div class="container">
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">ItemName</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of items; track $index)
+      {
+      <tr class="itemTr" (click)="goToItemDetail(item)">
+        <th scope="row">{{item.Id}}</th>
+        <td>{{item.ItemName}}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<!-- example using ngfor  -->
+<!-- <div *ngFor="let item of items; let i = index">
+  <div (click)="goToItemDetail(item)">
+    <a>{{item.Id}}: {{item.ItemName}}</a>
+  </div>
+  <br>
+</div> -->

@@ -257,16 +257,40 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<h2>{{title}} {{parentName}}</h2>
 
-<div>
-  <!-- child component -->
+<!-- child component
   <app-test [parentData]="parentName" (childEvent)="message=$event"></app-test>
 
   <div>
     <p class="text-success"> {{message}} </p>
   </div>
-</div>
 
+  <app-employees-list></app-employees-list>  -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
+  <div class="container">
+    <a class="navbar-brand" href="#">TestAngular</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/testPage">TestComponent</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/employeeList">Employees</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/itemsList">Items</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- sticky  -->
+<div id="zaidDiv" class="sticky-top mx-auto bg-danger rounded-pill text-center">{{parentName}}</div>
 
 <router-outlet></router-outlet>

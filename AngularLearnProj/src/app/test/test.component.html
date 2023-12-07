@@ -169,6 +169,13 @@
 
   <hr>
 
+  <!-- <ul *ngFor="let employee of listOfEmployees | async">
+    <li>{{employee.id}} , {{employee.employee_name}} ,{{employee.employee_salary}} ,{{employee.employee_age}}
+      ,{{employee.profile_image}}</li>
+  </ul> -->
 
+  @for (item of listOfEmployees; track $index) {
+  <li>Employee Id : {{item.id}} Employee Name : {{item.employee_name}} </li>
+  }
 
 </div>
