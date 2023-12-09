@@ -1,15 +1,40 @@
-<div>
-  <!-- Old Syntax to ngFor -->
-  <!-- <ul *ngFor="let employee of listOfEmployees">
+<!-- <div class="container"> -->
+<!-- Old Syntax to ngFor -->
+<!-- <ul *ngFor="let employee of listOfEmployees">
     <li>{{employee.id}} , {{employee.employee_name}} ,{{employee.employee_salary}} ,{{employee.employee_age}}
       ,{{employee.profile_image}}</li>
   </ul> -->
 
-  <!-- after version 7 for angular use @for -->
-  @for (employee of listOfEmployees; track $index) {
+<!-- after version 7 for angular use @for -->
+<!-- @for (employee of listOfEmployees; track $index) {
   <li>{{employee.id}} , {{employee.employee_name}} ,{{employee.employee_salary}} ,{{employee.employee_age}}
     ,{{employee.profile_image}}</li>
-  }
+  } -->
 
+<!-- </div> -->
 
+<div class="container">
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Employee Name</th>
+        <th scope="col">Employee Salary</th>
+        <th scope="col">Employee Age</th>
+        <th scope="col">Employee Profile Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (employee of listOfEmployees; track $index)
+      {
+      <tr>
+        <th scope="row">{{employee.id}}</th>
+        <td>{{employee.employee_name}}</td>
+        <td>{{employee.employee_salary}}</td>
+        <td>{{employee.employee_age}}</td>
+        <td>{{employee.profile_image}}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
 </div>

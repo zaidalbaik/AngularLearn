@@ -5,12 +5,13 @@ import { EmployeeService } from '../services/employee.service';
 import { FormsModule } from '@angular/forms';
 import { IEmployee, IStatus } from '../Models/IEmployee';
 import { Observable, Subscription } from 'rxjs';
+import { RouterOutlet } from '@angular/router';
 
 
 @Component({
   selector: 'app-employees-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterOutlet],
   templateUrl: './employees-list.component.html',
   styleUrl: './employees-list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush

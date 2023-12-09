@@ -12,15 +12,19 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 export class ItemDetailsComponent implements OnInit {
   itemId?: any;
   itemName?: any;
+  itemType?: any;
+
 
   constructor(private route: ActivatedRoute) { }
   ngOnInit(): void {
     // this.itemId = this.route.snapshot.paramMap.get('id');
     // this.itemName = this.route.snapshot.paramMap.get('itemName');
+    // this.itemType = this.route.snapshot.paramMap.get('itemType');
 
-    this.itemId = this.route.paramMap.subscribe((params: ParamMap) => {
-      let id = parseInt(params.get(`id`) as string);
-      this.itemId = id;
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.itemId = params.get('id');
+      this.itemName = params.get('itemName');
+      this.itemType = params.get('itemType');
     });
   }
 }

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-items-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterOutlet],
   templateUrl: './items-list.component.html',
   styleUrl: './items-list.component.css'
 })
@@ -19,14 +19,21 @@ export class ItemsListComponent {
   ]
 
   //ctor
-  constructor(private router: Router) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   goToItemDetailByID(item: any) {
     this.router.navigate(['/itemDetails', item.Id]);
   }
 
   goToItemDetail(item: any) {
-    this.router.navigate(['/itemDetails', { id: item.Id }]);
-    let s = "";
+
+    // required params
+    // this.router.navigate(['/itemDetails', { id: item.Id }]);
+
+    //optional params
+    this.router.navigate(['/itemDetails', { id: item.Id, itemName: item.ItemName, itemType: item.ItemType }]);
+
+    // relative navigation for more information see "https://www.c-sharpcorner.com/article/relative-navigation-in-angular/"
+    // this.router.navigate([item.id], { relativeTo: this.route });
   }
 }

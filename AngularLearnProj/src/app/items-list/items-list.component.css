@@ -1,3 +1,9 @@
 .itemTr:hover{
- opacity: .4;
+ opacity: .7;
 }
+
+.itemTr:hover td ,.itemTr:hover th {
+  color: black;
+}
+
+

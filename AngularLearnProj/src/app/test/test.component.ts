@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { IEmployee, IStatus } from '../Models/IEmployee';
 import { EmployeeService } from '../services/employee.service';
 import { Observable, Subscription } from 'rxjs';
+import { Router, ActivatedRoute, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-test',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterOutlet],
   templateUrl: './test.component.html',
   styleUrl: './test.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -54,7 +55,7 @@ export class TestComponent implements OnInit /*, OnDestroy*/ {
 
   //note: inject in Dependency injection :
   //for inject service use 'inject' method or  inject instance in constructor as param
-  constructor(private _employeeService: EmployeeService) { }
+  constructor(private _employeeService: EmployeeService, private router: Router, private route: ActivatedRoute) { }
 
   //for implement event use output()s
   @Output() public childEvent = new EventEmitter();
@@ -88,10 +89,14 @@ export class TestComponent implements OnInit /*, OnDestroy*/ {
     this.name = "zaid";
     this._employeeService.getStatus().subscribe(s => this.listOfEmployees = s.data);
   }
+
+  showEmployeeList() {
+    this.router.navigate(['employeeList'], { relativeTo: this.route });
+  }
 }
 
 
-// // learn Type Script
+// learn Type Script
 
 // interface Car {
 //   name: string;

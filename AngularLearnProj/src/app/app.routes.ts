@@ -8,8 +8,14 @@ import { ItemDetailsComponent } from './item-details/item-details.component';
 export const routes: Routes = [
   { path: "", redirectTo: "/testPage", pathMatch: "full" },
   { path: "employeeList", component: EmployeesListComponent },
-  { path: "testPage", component: TestComponent },
+  {
+    path: "testPage", component: TestComponent,
+    children: [
+      { path: "employeeList", component: EmployeesListComponent },
+    ]
+  },
   { path: "itemsList", component: ItemsListComponent },
+  { path: "itemDetails", component: ItemDetailsComponent },//for optional params
   { path: "itemDetails/:id", component: ItemDetailsComponent },
   { path: "**", component: PageNotFoundComponent }
 ];
